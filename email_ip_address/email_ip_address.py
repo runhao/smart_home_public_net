@@ -8,7 +8,7 @@ from email.header import Header
 from email.mime.text import MIMEText
 
 _config = configparser.ConfigParser()
-_config.read("../home.conf")
+_config.read("../service.conf")
 _logger = logging.getLogger("email_ip_address")
 _logger.setLevel(logging.INFO)
 _handler = handlers.TimedRotatingFileHandler(filename="email_ip_address.log", when="D", backupCount=3)
