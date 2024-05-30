@@ -8,7 +8,7 @@ from email.header import Header
 from email.mime.text import MIMEText
 
 _config = configparser.ConfigParser()
-_config.read("../service.conf")
+_config.read("/root/smart_home_public_net/service.conf")
 _logger = logging.getLogger("email_ip_address")
 _logger.setLevel(logging.INFO)
 _handler = handlers.TimedRotatingFileHandler(filename="email_ip_address.log", when="D", backupCount=3)
@@ -63,11 +63,14 @@ class IpEmail:
             _logger.error("邮件发送失败:%s" % str(e))
 
     def run(self):
-        with smtplib.SMTP(self.smtp_server, self.smtp_port) as server:
-            self.login(server)
-            while True:
-                self.send_message(server)
-                time.sleep(1 * 60)
+        try:
+            with smtplib.SMTP(self.smtp_server, self.smtp_port) as server:
+                self.login(server)
+                while True:
+                    self.send_message(server)
+                    time.sleep(1 * 60)
+        except Exception as e:
+            _logger.error("错误提示:%s" % str(e))
 
 
 if __name__ == "__main__":
