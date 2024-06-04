@@ -11,7 +11,7 @@ from email.header import Header
 from email.mime.text import MIMEText
 
 _config = configparser.ConfigParser()
-_config.read("../service.conf")
+_config.read("/root/smart_home_public_net/service.conf")
 _logger = logging.getLogger("email_ip_address")
 _logger.setLevel(logging.INFO)
 _handler = handlers.TimedRotatingFileHandler(filename="email_ip_address.log", when="D", backupCount=3)
@@ -80,7 +80,7 @@ class IpEmail:
                 _logger.info("邮件发送成功: %s" % self.ip)
             else:
                 _logger.info("当前IP未发生变化")
-        except smtplib.SMTPException as e:
+        except Exception as e:
             _logger.error("邮件发送失败:%s" % str(e))
 
     def run(self):
