@@ -11,10 +11,10 @@ from email.header import Header
 from email.mime.text import MIMEText
 
 _config = configparser.ConfigParser()
-_config.read("/Users/funenc/PycharmProjects/pythonProject/beixin/beixin/service.conf")
+_config.read("../service.conf")
 _logger = logging.getLogger("email_ip_address")
 _logger.setLevel(logging.INFO)
-_handler = handlers.TimedRotatingFileHandler(filename="/Users/funenc/PycharmProjects/pythonProject/beixin/beixin/email_ip_address.log", when="D", backupCount=3)
+_handler = handlers.TimedRotatingFileHandler(filename="email_ip_address.log", when="D", backupCount=3)
 _handler.setFormatter(logging.Formatter("%(asctime)s - %(levelname)s: %(message)s"))
 _logger.addHandler(_handler)
 
